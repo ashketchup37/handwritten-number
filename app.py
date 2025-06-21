@@ -60,14 +60,9 @@ if st.button("Generate 5 Images"):
     with torch.no_grad():
         images = model(noise, one_hot_labels).view(-1, 1, 28, 28)
 
-    # Convert generated images to NumPy format
-    fake_images = images.squeeze().detach().cpu().numpy()
-    
-    st.write("### Generated Samples")
-    cols = st.columns(5)
-    
-    for i in range(5):
-        img = fake_images[i]
-        cols[i].image(img, caption=f"{digit}", use_column_width=True)
+    # Display as a gridAdd commentMore actions
+    grid = make_grid(images, nrow=5, normalize=True)
+    npimg = grid.permute(1, 2, 0).numpy()
 
+    st.image(npimg, caption=f"Generated digit: {digit}")
 
