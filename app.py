@@ -64,5 +64,6 @@ if st.button("Generate 5 Images"):
     grid = make_grid(images, nrow=5, normalize=True)
     npimg = grid.permute(1, 2, 0).numpy()
 
-    st.image(npimg, caption=[str(digit)]*5, width=100)
+    st.image(npimg, caption=f"Generated digit: {digit}")
+
 
